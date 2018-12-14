@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::namespace('Admin')->prefix('admin')->group(function () {
+    Route::get('/movies', 'MoviesController@index')->name('movies');
+});

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Movies;
+use App\Entity\Movies;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class MoviesController extends Controller
 {
@@ -12,9 +13,19 @@ class MoviesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $title = $request->input("titulo");
+        if (!empty($title)) {
+            $movies = Movies::where('title', 'LIKE', '%'.$title.'%')->paginate(5);
+        } else {
+            $movies = Movies::paginate(5);
+        }
+
+        return view('admin.movies.index', [
+            'movies' => $movies,
+            'title' => $title
+            ]);
     }
 
     /**
