@@ -9,6 +9,14 @@ class Movies extends Model
     //
     public $timestamps = false;
 
+    protected $fillable = [
+        'title',
+        'rating',
+        'awards',
+        'release_date',
+        'length',
+        'genre'
+    ];
 
     protected $attributes = [
         'awards' => 0,

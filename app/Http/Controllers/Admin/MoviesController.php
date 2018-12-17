@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Entity\Movies;
+use App\Entity\Genres;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -35,7 +36,11 @@ class MoviesController extends Controller
      */
     public function create()
     {
-        //
+        $genres = Genres::where('active', true)->orderBy('name')->pluck('name', 'id');
+
+        return view('admin.movies.create', [
+            'genres' => $genres
+        ]);
     }
 
     /**
@@ -46,7 +51,12 @@ class MoviesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request->movies);
+        //dd($request->all());
+        //die;
+        //$user = Movies::create($request->all());
+        $user = Movies::create($request->movies);
+        return redirect()->route('admin_movies_update');
     }
 
     /**

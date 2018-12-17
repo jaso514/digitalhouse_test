@@ -15,6 +15,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::namespace('Admin')->prefix('admin')->group(function () {
-    Route::get('/movies', 'MoviesController@index')->name('admin_movies');
+Auth::routes();
+
+Route::namespace('Auth')->group(function () {
+    Route::get('logout', 'LoginController@logout');
 });
+
+Route::namespace('Admin')->prefix('admin')->group(function () {
+    Route::get('/', 'AdminController@index')->name('admin_home');
+
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/movies', 'MoviesController@index')->name('admin_movies');
+        Route::get('/movies/create', 'MoviesController@create')->name('admin_movies_create');
+        Route::get('/movies/update', 'MoviesController@update')->name('admin_movies_update');
+        Route::post('/movies/save', 'MoviesController@store')->name('admin_movies_save');
+        Route::get('/movies/delete', 'MoviesController@destroy')->name('admin_movies_delete');
+    });
+});
+
+

@@ -1,18 +1,35 @@
 <html>
     <head>
-        <title>App Name - @yield('title')</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        
+        <title>@yield('title')</title>
+        
         @include('admin.layouts.styles')
     </head>
     <body>
-        
         <div class="container-fluid h-100">
             @include('admin.layouts.header')
-            <div class="row">
+            <div class="row  h-100">
                 @include('admin.layouts.sidebar', ['page' => isset($page)?$page:null])
-                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mt-2">
                     @yield('content')
                 </main>
             </div>
+            @include('admin.layouts.footer')
         </div>
+        
+        <!-- Scripts -->
+        <script src="{{ asset('js/app.js') }}" ></script>
+        <script src="{{ asset('js/jquery-ui.min.js') }}" type="javascript"></script>
+        <script type="javascript">
+            console.log("123123")
+            $(window).ready(function(){
+                console.log("asd");
+                $( ".datepicker" ).datepicker();
+            });
+        </script>
     </body>
 </html>
