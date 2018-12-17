@@ -1,13 +1,17 @@
 @if ($paginator->hasPages())
-    <ul class="pagination justify-content-center" role="navigation">
+    <ul class="pagination justify-content-center pager-black" role="navigation">
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
             <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">
-                <span class="page-link" aria-hidden="true">&lsaquo;&lsaquo;</span>
+                <span class="page-link" aria-hidden="true">
+                    <i class="fas fa-angle-double-left"></i>&nbsp;
+                </span>
             </li>
         @else
             <li class="page-item">
-                <a class="page-link" href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-label="@lang('pagination.previous')">&lsaquo;&lsaquo;</a>
+                <a class="page-link" href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-label="@lang('pagination.previous')">
+                <i class="fas fa-angle-double-left"></i>&nbsp;
+                </a>
             </li>
         @endif
 
@@ -33,11 +37,15 @@
         {{-- Next Page Link --}}
         @if ($paginator->hasMorePages())
             <li class="page-item">
-                <a class="page-link" href="{{ $paginator->nextPageUrl() }}" rel="next" aria-label="@lang('pagination.next')">&rsaquo;&rsaquo;</a>
+                <a class="page-link" href="{{ $paginator->nextPageUrl() }}" rel="next" aria-label="@lang('pagination.next')">
+                &nbsp;<i class="fas fa-angle-double-right"></i>
+                </a>
             </li>
         @else
             <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.next')">
-                <span class="page-link" aria-hidden="true">&rsaquo;&rsaquo;</span>
+                <span class="page-link" aria-hidden="true">
+                    &nbsp;<i class="fas fa-angle-double-right"></i>
+                </span>
             </li>
         @endif
     </ul>

@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Migrations;
 use Illuminate\Http\Request;
 
-class MigrationsController extends Controller
+class Movies extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +40,10 @@ class MigrationsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Migrations  $migrations
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Migrations $migrations)
+    public function show($id)
     {
         //
     }
@@ -52,10 +51,10 @@ class MigrationsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Migrations  $migrations
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Migrations $migrations)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +63,10 @@ class MigrationsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Migrations  $migrations
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Migrations $migrations)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,10 +74,10 @@ class MigrationsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Migrations  $migrations
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Migrations $migrations)
+    public function destroy($id)
     {
         //
     }

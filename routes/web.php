@@ -11,14 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'MainController@index')->name('index');
 
 Auth::routes();
 
 Route::namespace('Auth')->group(function () {
     Route::get('logout', 'LoginController@logout');
+});
+
+Route::namespace('Api')->prefix('api')->group(function () {
+    Route::resource('/movies', 'MoviesController');
 });
 
 Route::namespace('Admin')->prefix('admin')->group(function () {
