@@ -4,9 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Entity\Movies;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-class MoviesController extends Controller
+class MoviesController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -18,20 +17,7 @@ class MoviesController extends Controller
         $title = $request->input("title", null);
         $items = Movies::searchByTitle($title);
         
-        $code = 200;
-        $data = [];
-        $message = '';
-
-        if ($items->count()===0) {
-            $code = 404;
-            $message = 'No se encontraron resultados.';
-        }
-
-        return response()->json([
-            'success' => $code==200,
-            'message' => $message,
-            'data' => $items
-        ], $code);
+        return $this->responseList($request, $items);
     }
 
     /**
@@ -52,24 +38,7 @@ class MoviesController extends Controller
      */
     public function store(Request $request)
     {
-        $item = Movies::firstOrCreate(
-            $request->all()
-        );
-        
-        $code = 200;
-        $data = [];
-        $message = '';
-        
-        if (empty($item->id)) {
-            $code = 400;
-            $message = 'No se guardo el registro.';
-        }
-
-        return response()->json([
-            'success' => $code==200,
-            'message' => $message,
-            'data' => $item
-        ], $code);
+        return $this->save($request, Movies::class);
     }
 
     /**
@@ -118,24 +87,7 @@ class MoviesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $item = Movies::where('id', $id)->update(
-            $request->all()
-        );
-        
-        $code = 200;
-        $data = [];
-        $message = '';
-        
-        if (empty($item->id)) {
-            $code = 400;
-            $message = 'No se guardo el registro.';
-        }
-
-        return response()->json([
-            'success' => $code==200,
-            'message' => $message,
-            'data' => $item
-        ], $code);
+        return $this->modify($request, Movies::class, $id);
     }
 
     /**
@@ -144,8 +96,8 @@ class MoviesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        return $this->delete($request, Movies::class, $id);
     }
 }

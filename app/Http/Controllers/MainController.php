@@ -31,4 +31,8 @@ class MainController extends Controller {
             'title' => $title
             ]);
     }
+    
+    public function indexRest(Request $request) {
+        return view('main.indexRest');
+    }
 }

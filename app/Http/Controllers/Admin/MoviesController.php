@@ -55,7 +55,7 @@ class MoviesController extends Controller
         //dd($request->all());
         //die;
         //$user = Movies::create($request->all());
-        $user = Movies::create($request->movies);
+        $movie = Movies::create($request->movies);
         return redirect()->route('admin_movies_update');
     }
 
