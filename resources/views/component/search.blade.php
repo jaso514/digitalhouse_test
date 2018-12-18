@@ -1,5 +1,5 @@
 <form action="{{ $submitUrl }}" id="form" class="form-inline justify-content-center">
-    <div class="input-group">
+    <div class="input-group col-12">
         <label for="titulo" class="sr-only">Buscar</label>&nbsp;
         @foreach ($fields as $key => $field)
         <input type="text" name="{{ $key }}" id="{{ $key }}" value="{{ $field['value'] }}"
