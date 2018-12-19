@@ -50,8 +50,8 @@
                 <td>{{ $movie->rating }}</td>
                 <td>{{ $movie->genre?$movie->genre->name:"---" }}</td>
                 <td>
-                    <a href="" title="Editar" alt="Editar"><span class="fas fa-edit"></span></a>
-                    <a href="" title="Eliminar" alt="Eliminar"><span class="fas fa-trash"></span></a>
+                    <a href="{{ route('admin_movies_edit', ['movies' => $movie->id]) }}" title="Editar" alt="Editar"><span class="fas fa-edit"></span></a>
+                    <a href="{{ route('admin_movies_delete', ['movies' => $movie->id]) }}" title="Eliminar" alt="Eliminar"><span class="fas fa-trash"></span></a>
                 </td>
             </tr>
             @endforeach

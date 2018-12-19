@@ -117,7 +117,8 @@ class MoviesController extends Controller
      */
     public function destroy(Movies $movies)
     {
-        // $destroyed = $movies->delete();
+        $destroyed = $movies->delete();
         
+        return redirect()->back();
     }
 }
