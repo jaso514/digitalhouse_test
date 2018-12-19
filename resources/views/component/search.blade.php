@@ -1,11 +1,11 @@
-<form action="{{ $submitUrl }}" id="form" class="form-inline justify-content-center">
+<form action="{{ $submitUrl }}" id="search-form" class="form-inline justify-content-center">
     <div class="input-group col-12">
         <label for="titulo" class="sr-only">Buscar</label>&nbsp;
         @foreach ($fields as $key => $field)
         <input type="text" name="{{ $key }}" id="{{ $key }}" value="{{ $field['value'] }}"
                placeholder="{{ $field['title'] }}" class="form-control mr-sm-2">
         @endforeach
-        <button type="submit" class="btn btn-primary mb-2">
+        <button type="submit" class="btn btn-primary mb-2" id="search-submit">
             <i class="fas fa-search"></i>
         </button>
         @if (isset($clean) && $clean)

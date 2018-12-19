@@ -22,13 +22,12 @@
         </div>
         
         <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" ></script>
-        <script src="{{ asset('js/jquery-ui.min.js') }}" type="javascript"></script>
-        <script type="javascript">
-            console.log("123123")
-            $(window).ready(function(){
-                console.log("asd");
-                $( ".datepicker" ).datepicker();
+        <script src="{{ asset('js/jquery.min.js') }}" ></script>
+        <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/jquery-ui.min.js') }}" defer></script>
+        <script defer>
+            $(document).ready(function(){
+                $( ".datepicker" ).datepicker({'dateFormat': 'yy-mm-dd'});
             });
         </script>
     </body>

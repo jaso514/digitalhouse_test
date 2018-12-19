@@ -6,6 +6,7 @@ use App\Entity\Movies;
 use App\Entity\Genres;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class MoviesController extends Controller
 {
@@ -51,23 +52,19 @@ class MoviesController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->movies);
-        //dd($request->all());
-        //die;
-        //$user = Movies::create($request->all());
+        $validator = Validator::make($request->movies, [
+            'title' => 'bail|required|max:255',
+            'release_date' => 'required|date',
+            'awards' => 'required|numeric',
+            'rating' => 'required|numeric|max:10'
+        ]);
+        
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput($request->input());
+        }
+        
         $movie = Movies::create($request->movies);
-        return redirect()->route('admin_movies_update');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Movies  $movies
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Movies $movies)
-    {
-        //
+        return redirect()->route('admin_movies_edit', ['id' => $movie->id]);
     }
 
     /**
@@ -78,7 +75,12 @@ class MoviesController extends Controller
      */
     public function edit(Movies $movies)
     {
-        //
+        $genres = Genres::where('active', true)->orderBy('name')->pluck('name', 'id');
+
+        return view('admin.movies.edit', [
+            'movie' => $movies,
+            'genres' => $genres,
+        ]);
     }
 
     /**
@@ -90,7 +92,21 @@ class MoviesController extends Controller
      */
     public function update(Request $request, Movies $movies)
     {
-        //
+        $validator = Validator::make($request->movies, [
+            'title' => 'bail|required|max:255',
+            'release_date' => 'required|date',
+            'awards' => 'required|numeric',
+            'rating' => 'required|numeric|max:10'
+        ]);
+        
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        
+        $movies->fill($request->movies);
+        $movies->update();
+
+        return redirect()->route('admin_movies_edit', ['movies' => $movies->id]);
     }
 
     /**
@@ -101,6 +117,7 @@ class MoviesController extends Controller
      */
     public function destroy(Movies $movies)
     {
-        //
+        // $destroyed = $movies->delete();
+        
     }
 }

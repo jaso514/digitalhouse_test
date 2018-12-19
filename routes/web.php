@@ -13,6 +13,8 @@
 
 Route::get('/', 'MainController@index')->name('index');
 
+Route::get('/rest', 'MainController@indexRest')->name('index_index');
+
 Auth::routes();
 
 Route::namespace('Auth')->group(function () {
@@ -29,7 +31,8 @@ Route::namespace('Admin')->prefix('admin')->group(function () {
     Route::middleware(['auth'])->group(function () {
         Route::get('/movies', 'MoviesController@index')->name('admin_movies');
         Route::get('/movies/create', 'MoviesController@create')->name('admin_movies_create');
-        Route::get('/movies/update', 'MoviesController@update')->name('admin_movies_update');
+        Route::get('/movies/edit/{movies}', 'MoviesController@edit')->name('admin_movies_edit');
+        Route::post('/movies/update/{movies}', 'MoviesController@update')->name('admin_movies_update');
         Route::post('/movies/save', 'MoviesController@store')->name('admin_movies_save');
         Route::get('/movies/delete', 'MoviesController@destroy')->name('admin_movies_delete');
     });

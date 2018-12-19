@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSeasonsTable extends Migration
+class AddRevenueMovies extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CreateSeasonsTable extends Migration
      */
     public function up()
     {
-        Schema::create('seasons', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+        Schema::table('movies', function($table) {
+            $table->decimal('revenue', 12, 2);
         });
     }
 
@@ -26,6 +25,8 @@ class CreateSeasonsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('seasons');
+        Schema::table('movies', function($table) {
+            $table->dropColumn('revenue');
+        });
     }
 }

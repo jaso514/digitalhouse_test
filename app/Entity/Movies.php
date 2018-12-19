@@ -14,7 +14,7 @@ class Movies extends Model
         'awards',
         'release_date',
         'length',
-        'genre'
+        'genre_id'
     ];
 
     protected $attributes = [
@@ -43,7 +43,7 @@ class Movies extends Model
 
         $itemsPerPage = config('global.paginationFront');
         
-        $movies = $movies->orderBy('title');
+        $movies = $movies->with("genre")->orderBy('title');
         $movies = $movies->paginate($itemsPerPage);
 
         return $movies;

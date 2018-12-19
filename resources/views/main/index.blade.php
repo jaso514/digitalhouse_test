@@ -21,16 +21,13 @@
     </div>
     <div class="row justify-content-center">
         @foreach ($movies as $movie)
-        <div class="col-9 col-md-4 text-center">
-            <figure class="figure">
-                <img src="https://loremflickr.com/180/240?random={!! rand(0,1080) !!}" class="figure-img img-fluid rounded">
-                <figcaption class="figure-caption text-center">
+            @component('component.movie_item')
+                @slot('info')
                     {{ $movie->title }}<br>
                     ({{ $movie->rating . '/10' }})<br>
                     <small>{{ $movie->genre?$movie->genre->name:" " }}</small>
-                </figcaption>
-            </figure>
-        </div>
+                @endslot
+            @endcomponent
         @endforeach
     </div>
     <div class="col-12 justify-content-center">

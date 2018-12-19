@@ -3,13 +3,8 @@
     <div class="sidebar-sticky">
         <ul class="nav flex-column nav-pills">
             <li class="nav-item">
-                <a class="nav-link active" href="#">
+                <a class="nav-link active" href="{{ route('admin_movies') }}">
                     Peliculas
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    Actores
                 </a>
             </li>
         </ul>
